@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from traffic_flow_control import views as traffic_flow_control_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', traffic_flow_control_views.home)
 ]
