@@ -56,9 +56,16 @@ body {
   transition: .5s ease-in-out;
 }
 
-p {
+h6 {
   margin-left: 1%;
   color: white;
+  font-family: Arial, serif;
+  font-size: 80%;
+}
+
+p {
+  margin-left: 1%;
+  color: black;
   font-family: Arial, serif;
   font-size: 80%;
 }

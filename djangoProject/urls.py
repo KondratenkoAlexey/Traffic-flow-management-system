@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from traffic_flow_control import views as traffic_flow_control_views
+from traffic_flow import views as traffic_flow_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', traffic_flow_control_views.home)
+    path('', traffic_flow_views.home),
+    path("client/", traffic_flow_views.client)
 ]
