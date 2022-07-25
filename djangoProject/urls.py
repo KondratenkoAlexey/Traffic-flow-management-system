@@ -19,6 +19,8 @@ from traffic_flow import views as traffic_flow_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', traffic_flow_views.home),
-    path("client/", traffic_flow_views.client)
+    path('', traffic_flow_views.home, name="home"),
+    path('client/', traffic_flow_views.client, name="client"),
+    path('client/loading/', traffic_flow_views.loading, name='loading'),
+    path('client/unloading/', traffic_flow_views.unloading, name='unloading'),
 ]

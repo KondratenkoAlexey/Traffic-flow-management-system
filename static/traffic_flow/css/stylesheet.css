@@ -61,11 +61,12 @@ h6 {
   color: white;
   font-family: Arial, serif;
   font-size: 80%;
+  font-weight: 100;
 }
 
 p {
-  margin-left: 1%;
   color: black;
   font-family: Arial, serif;
-  font-size: 80%;
+  font-size: 100%;
+  font-weight: bolder;
 }
