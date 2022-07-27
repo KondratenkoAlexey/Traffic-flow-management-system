@@ -57,4 +57,4 @@ def unloading(request):
 
 
 def operator(request):
-    return render(request, "client.html")
+    return render(request, "base_table.html")

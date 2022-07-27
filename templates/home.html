@@ -3,8 +3,8 @@
 {% block content %}
 
     <div id="content">
-        <a href="client/" class="shine-button">Клиент</a>
-        <a href="operator/" class="shine-button">Оператор</a>
+        <a style="margin-top: 15%" href="client/" class="shine-button">Клиент</a>
+        <a href="{% url 'login' %}?next={% url 'operator_table'%}" class="shine-button">Оператор</a>
     </div>
 
 {% endblock content %}
