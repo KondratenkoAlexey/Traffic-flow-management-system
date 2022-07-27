@@ -1,4 +1,5 @@
 table {
+    margin-left: 2%;
     font-family: inherit;
     font-size: 14px;
     border-radius: 10px;
@@ -6,7 +7,7 @@ table {
     text-align: center;
 }
 th {
-    background: #BCEBDD;
+    background: #668acc;
     color: white;
     text-shadow: 0 1px 1px #2D2020;
     padding: 10px 20px;
@@ -17,7 +18,7 @@ th, td {
     border-color: white;
 }
 th:first-child, td:first-child {
-    text-align: left;
+    text-align: center;
 }
 th:first-child {
     border-top-left-radius: 10px;
@@ -28,7 +29,7 @@ th:last-child {
 }
 td {
     padding: 10px 20px;
-    background: #F8E391;
+    background: #e6ebfa;
 }
 tr:last-child td:first-child {
     border-radius: 0 0 0 10px;

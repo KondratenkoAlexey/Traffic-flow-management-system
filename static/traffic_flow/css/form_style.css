@@ -11,7 +11,7 @@ input[type=text] {
     border: 2px solid #eee;
     box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
     border-radius: 10px;
-    width: 100%;
+    width: 93%;
     font-family: inherit;
     font-size: inherit;
 }
@@ -22,7 +22,18 @@ input[type=password] {
     border: 2px solid #eee;
     box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
     border-radius: 10px;
-    width: 100%;
+    width: 93%;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+select {
+    padding: 10px;
+    margin: 2% 0 2% 0;
+    border: 2px solid #eee;
+    box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+    border-radius: 10px;
+    width: 235px;
     font-family: inherit;
     font-size: inherit;
 }

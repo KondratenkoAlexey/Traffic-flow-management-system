@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import Loading, Unloading
+from .forms import Loading, Unloading, Operator_control
 from .models import Truck, Operator
 from datetime import datetime
 
@@ -13,7 +13,6 @@ def client(request):
 
 
 def loading(request):
-
     if request.method == 'POST':
         current_time = datetime.now()
         form = Loading(request.POST, request.FILES)
@@ -35,10 +34,10 @@ def loading(request):
 
 
 def unloading(request):
-
     if request.method == 'POST':
         current_time = datetime.now()
         form = Unloading(request.POST, request.FILES)
+
         if form.is_valid():
             truck = Truck()
             truck.truck_number = form.cleaned_data["truck_number"]
@@ -57,4 +56,31 @@ def unloading(request):
 
 
 def operator(request):
-    return render(request, "base_table.html")
+    trucks = Truck.objects.all()
+
+    if request.method == "POST":
+        form = Operator_control(request.POST, request.FILES)
+
+        if form.is_valid():
+
+            number = form.cleaned_data["truck_number"]
+
+            truck = Truck.objects.get(truck_number=number)
+            truck.command = form.cleaned_data["command"]
+
+            if truck.command == "call":
+                truck.warehouse = form.cleaned_data["warehouse"]
+                truck.ramp = form.cleaned_data["ramp"]
+            elif truck.command == "entered":
+                truck.entry_time = datetime.now()
+                truck.state = Truck.STATE["e"]
+            elif truck.command == "departure":
+                truck.departure_time = datetime.now()
+                truck.state = Truck.STATE["d"]
+
+            truck.save()
+            return redirect("operator_table")
+    else:
+        form = Operator_control
+
+    return render(request, "operator_table.html", {"form": form, "trucks": trucks})
