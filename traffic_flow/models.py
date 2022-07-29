@@ -14,18 +14,20 @@ class Truck(models.Model):
     PROCEDURE_TYPE = {"l": "Погрузка", "u": "Разгрузка"}
     WAREHOUSE_NUMBER = [("A", "A"), ("B", "B"), ("C", "C"), ("D", "D"), ("E", "E")]
     RAMP_NUMBER = [("1", 1), ("2", 2), ("3", 3), ("4", 4), ("5", 5), ("6", 6), ("7", 7), ("8", 8), ("9", 9)]
-    STATE = {"r": "Зарегистрирован", "e": "Въехал", "d": "Выехал"}
+    STATE = {"r": "Зарегистрирован", "c": "Вызван", "e": "Въехал", "d": "Выехал"}
     OPERATOR_COMMAND = [("call", "Вызвать"), ("entered", "Въехал"), ("departure", "Выехал")]
 
-    truck_number = models.CharField(blank=False, max_length=15, primary_key=True, unique=True)
+    truck_number = models.CharField(blank=False, max_length=15)
     phone_number = models.CharField(blank=False, max_length=20)
     company = models.CharField(blank=False, max_length=200)
     procedure = models.CharField(blank=False, max_length=10)
     warehouse = models.CharField(max_length=1, choices=WAREHOUSE_NUMBER)
     ramp = models.CharField(max_length=1, choices=RAMP_NUMBER)
     registration_time = models.DateTimeField()
-    entry_time = models.DateTimeField(null=True)
-    departure_time = models.DateTimeField(null=True)
+    # entry_time = models.DateTimeField(null=True, blank=True)
+    # departure_time = models.DateTimeField(null=True, blank=True)
+    entry_time = models.CharField(null=True, blank=True, max_length=20)
+    departure_time = models.CharField(null=True, blank=True, max_length=20)
     state = models.CharField(max_length=1)
     command = models.CharField(blank=True, max_length=10, choices=OPERATOR_COMMAND)
 

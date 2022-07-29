@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
-from .forms import Loading, Unloading, Operator_control
-from .models import Truck, Operator
+from .forms import Process, OperatorControl
+from .models import Truck
 from datetime import datetime
+import locale
+
+locale.setlocale(locale.LC_TIME, "ru")
 
 
 def home(request):
@@ -15,7 +18,7 @@ def client(request):
 def loading(request):
     if request.method == 'POST':
         current_time = datetime.now()
-        form = Loading(request.POST, request.FILES)
+        form = Process(request.POST, request.FILES)
 
         if form.is_valid():
             truck = Truck()
@@ -29,14 +32,14 @@ def loading(request):
             truck.save()
             return redirect("home")
     else:
-        form = Loading
+        form = Process
     return render(request, "loading.html", {"form": form})
 
 
 def unloading(request):
     if request.method == 'POST':
         current_time = datetime.now()
-        form = Unloading(request.POST, request.FILES)
+        form = Process(request.POST, request.FILES)
 
         if form.is_valid():
             truck = Truck()
@@ -50,37 +53,43 @@ def unloading(request):
             truck.save()
             return redirect("home")
     else:
-        form = Unloading
+        form = Process
 
     return render(request, "unloading.html", {"form": form})
 
 
 def operator(request):
-    trucks = Truck.objects.all()
+    trucks = Truck.objects.all().filter(state__in=['Зарегистрирован', "Вызван", "Въехал"])
 
     if request.method == "POST":
-        form = Operator_control(request.POST, request.FILES)
+        form = OperatorControl(request.POST, request.FILES)
 
         if form.is_valid():
 
             number = form.cleaned_data["truck_number"]
-
             truck = Truck.objects.get(truck_number=number)
             truck.command = form.cleaned_data["command"]
 
             if truck.command == "call":
                 truck.warehouse = form.cleaned_data["warehouse"]
                 truck.ramp = form.cleaned_data["ramp"]
-            elif truck.command == "entered":
-                truck.entry_time = datetime.now()
+                truck.state = Truck.STATE["c"]
+            elif truck.command == "entered" and truck.state == Truck.STATE["c"]:
+                truck.entry_time = datetime.now().strftime("%d-%m-%Y\n%H:%M")
                 truck.state = Truck.STATE["e"]
-            elif truck.command == "departure":
-                truck.departure_time = datetime.now()
+            elif truck.command == "departure" and truck.state == Truck.STATE["e"]:
+                truck.departure_time = datetime.now().strftime("%d-%m-%Y\n%H:%M")
                 truck.state = Truck.STATE["d"]
 
             truck.save()
             return redirect("operator_table")
     else:
-        form = Operator_control
+        form = OperatorControl
 
     return render(request, "operator_table.html", {"form": form, "trucks": trucks})
+
+
+def driver(request):
+    trucks = Truck.objects.all().filter(state__in=['Зарегистрирован', "Вызван"])
+
+    return render(request, "driver_table.html", {"trucks": trucks})

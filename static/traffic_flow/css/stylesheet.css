@@ -3,16 +3,22 @@ body {
 }
 
 #header {
+    height: 5%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     padding: 10px;
     background-color: white;
 }
 
 #content {
+    height: 94%;
     padding: 5%;
     background-color: white;
 }
 
 #footer {
+    margin-top: 2%;
     display: flex;
     flex-direction: row;
     align-content: center;
@@ -81,4 +87,8 @@ p {
     font-family: Arial, serif;
     font-size: 100%;
     font-weight: bolder;
+}
+
+li {
+    color: red;
 }
