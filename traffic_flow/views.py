@@ -4,7 +4,7 @@ from .models import Truck
 from datetime import datetime
 import locale
 
-locale.setlocale(locale.LC_TIME, "ru")
+locale.setlocale(locale.LC_TIME, "ru-RU")
 
 
 def home(request):
