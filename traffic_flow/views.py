@@ -90,6 +90,6 @@ def operator(request):
 
 
 def driver(request):
-    trucks = Truck.objects.all().filter(state__in=['Зарегистрирован', "Вызван"])
+    trucks = Truck.objects.filter(state__in=['Зарегистрирован', "Вызван"])
 
     return render(request, "driver_table.html", {"trucks": trucks})
